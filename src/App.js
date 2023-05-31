@@ -24,7 +24,8 @@ class App extends Component {
     this.state = {
       loading: false,
       imagesList: [],
-      downloadImageCallback: undefined
+      downloadImageCallback: undefined,
+      blur_div_css: "background-div"
     };
 
     this.toggleSpinner = this.toggleSpinner.bind(this);
@@ -32,7 +33,8 @@ class App extends Component {
 
   toggleSpinner() {
     this.setState(state => ({
-      loading: !state.loading
+      loading: !state.loading,
+      blur_div_css: (!state.loading ? "background-div blur-div" : "background-div")
     }));
   }
 
@@ -54,15 +56,15 @@ class App extends Component {
         <div className="mid-screen-div">
           <LoadingSpinner loading={this.state.loading} />
         </div>
-        <div className="background-div">
+        <div className={this.state.blur_div_css} >
           <ApolloProvider client={client}>
             <ImageList imagesList={this.state.imagesList} updateImagesListCallback={(newImagesList) => this.updateImagesList(newImagesList)} setDownloadImageCallback={(callback) => this.setDownloadImageCallback(callback)} />
             <div className='stick-bottom'>
-              <UploadForm toggleSpinnerCallback={() => this.toggleSpinner} imagesList={this.state.imagesList} updateImagesListCallback={(newImagesList) => this.updateImagesList(newImagesList)} downloadImage={(e, filename) => this.state.downloadImageCallback(e, filename)} />
+              <UploadForm toggleSpinnerCallback={this.toggleSpinner} imagesList={this.state.imagesList} updateImagesListCallback={(newImagesList) => this.updateImagesList(newImagesList)} />
             </div>
           </ApolloProvider>
         </div>
-      </div>
+      </div >
     )
   }
 }
