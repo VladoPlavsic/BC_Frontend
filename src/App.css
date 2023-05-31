@@ -508,3 +508,24 @@ a .uil {
   height: 13%;
   width: 100%;
 }
+
+.background-div {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+
+.mid-screen-div {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+  min-width: 100px;
+  min-height: 100px;
+}
